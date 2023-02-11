@@ -40,14 +40,5 @@ watch(
       :disabled="disabled"
       :type="showPassword ? 'text' : 'password'"
     />
-    <button
-      type="button"
-      :disabled="disabled"
-      @click="showPassword = !showPassword"
-      class="rounded-r bg-white text-slate-500 border border-l-0 outline-none focus:text-teal-500"
-    >
-      <eye-slashed v-if="showPassword" class="h-8 w-8 p-1" />
-      <eye-open v-else class="h-8 w-8 p-1" />
-    </button>
   </div>
 </template>

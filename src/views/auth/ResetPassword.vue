@@ -36,20 +36,20 @@ async function onSubmit() {
 }
 </script>
 <template>
-  <div>
-    <h2 class="mb- text-2xl font-bold">Reset Password</h2>
+  <AppTopBar :signUp="false" />
+  <div class="text-center mt-16 flex flex-col w-full items-center">
+    <h2 class="mb-4 text-2xl font-bold">Reset Password</h2>
     <p class="mb-4 text-sm text-slate-500">Choose a new password below</p>
-    <form class="flex w-full flex-col items-start" @submit.prevent="onSubmit">
+    <form class="flex flex-col items-start" @submit.prevent="onSubmit">
       <VLabel for="password">Password</VLabel>
       <VPasswordInput
         :disabled="loading"
-        class="mb-4 w-full"
+        class="w-full"
         name="password"
         id="password"
         placeholder="Choose your password"
         v-model="password"
       />
-
       <VButton
         :loading="loading"
         type="submit"

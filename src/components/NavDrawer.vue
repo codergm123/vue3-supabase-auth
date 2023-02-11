@@ -19,7 +19,7 @@
     >
       <nav class="py-2">
         <span class="nav-button">
-          Vuepabase
+          TestPro
           <i-simple-icons-vuedotjs class="ml-2 h-4 w-4" />
           <i-simple-icons-supabase class="ml-2 h-4 w-4" />
         </span>

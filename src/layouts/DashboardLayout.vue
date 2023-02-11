@@ -22,7 +22,6 @@ onMounted(() => {
       class="flex h-full max-h-full max-w-full flex-grow flex-col bg-zinc-100 text-zinc-900 transition-all dark:bg-zinc-900 dark:text-zinc-100"
       :class="{ 'lg:pl-64': open }"
     >
-      <AppTopBar v-model="open" />
       <main class="flex-grow overflow-auto px-4 py-2">
         <router-view />
       </main>

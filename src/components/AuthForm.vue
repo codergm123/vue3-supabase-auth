@@ -6,13 +6,12 @@ import { UserCredentials } from "@supabase/supabase-js";
 const props = defineProps<{
   signUp: boolean;
   title: string;
-  subtitle: string;
-  emailPlaceholder: string;
-  passwordPlaceholder: string;
 }>();
 
 const credentials: Ref<UserCredentials> = ref({
   email: "",
+  fname: "",
+  lname: "",
   password: "",
 });
 
@@ -111,13 +110,34 @@ const loading = computed(
 </script>
 <template>
   <div>
-    <h2 class="mb- text-2xl font-bold">
+    <h2 class="title text-center">
       {{ title }}
     </h2>
-    <p class="mb-4 text-sm text-slate-500">
-      {{ subtitle }}
-    </p>
     <form class="flex w-full flex-col items-start" @submit.prevent="emailAuth">
+      <VLabel v-if="signUp" for="fname">First Name</VLabel>
+      <VInput
+        v-if="signUp" 
+        required
+        :disabled="loading"
+        class="w-full"
+        name="First name"
+        id="fname"
+        type="text"
+        :placeholder="fnameholder"
+        v-model="(credentials.fname as string)"
+      />
+      <VLabel v-if="signUp" for="lname">Last name</VLabel>
+      <VInput
+        v-if="signUp" 
+        required
+        :disabled="loading"
+        class="w-full"
+        name="lname"
+        id="lname"
+        type="text"
+        :placeholder="lnamePlaceholder"
+        v-model="(credentials.lname as string)"
+      />
       <VLabel for="email">Email</VLabel>
       <VInput
         required
@@ -139,13 +159,6 @@ const loading = computed(
         v-model="(credentials.password as string)"
       />
 
-      <router-link
-        v-if="!signUp"
-        to="/forgotpassword"
-        class="mb-4 text-sm font-bold"
-        >Forgot your password?</router-link
-      >
-
       <VButton
         :loading="emailLoading"
         :disabled="loading"
@@ -153,46 +166,39 @@ const loading = computed(
         class="bg-teal-700"
         >{{ signUp ? "Sign Up" : "Sign In" }}</VButton
       >
+      <router-link
+        v-if="!signUp"
+        to="/forgotpassword"
+        class="text-sm text-center font-bold"
+        style="width: 100%; margin-top: 24px; font-family: 'Noto Sans'; font-style: normal; font-weight: 500; font-size: 13px; line-height: 18px; color: #322DF0;"
+      >
+        Forgot your password?
+      </router-link>
+      <router-link
+        v-if="signUp"
+        to=""
+        class="text-sm text-center font-bold mt-6"
+        style="width: 100%; font-family: 'Noto Sans'; font-style: normal; font-weight: 500; font-size: 13px; line-height: 18px;"
+      >
+        By clicking "Sign up" you agree to our <span style="color: #322DF0;">Terms & Privacy Policy</span>
+      </router-link>
     </form>
-    <div class="flex space-x-2">
-      <VButton
-        :loading="gitHubLoading"
-        :disabled="loading"
-        type="button"
-        class="flex items-center justify-center bg-black"
-        @click="gitHubAuth"
-      >
-        <i-mdi-github class="h-5 w-5" />
-      </VButton>
-      <VButton
-        :loading="googleLoading"
-        :disabled="loading"
-        type="button"
-        class="flex items-center justify-center bg-[#EA4335]"
-        @click="googleAuth"
-      >
-        <i-mdi-google class="h-5 w-5" />
-      </VButton>
-      <VButton
-        :loading="twitterLoading"
-        :disabled="loading"
-        type="button"
-        class="flex items-center justify-center bg-[#1DA1F2]"
-        @click="twitterAuth"
-      >
-        <i-mdi-twitter class="h-5 w-5" />
-      </VButton>
-      <VButton
-        :loading="facebookLoading"
-        :disabled="loading"
-        type="button"
-        class="flex items-center justify-center bg-[#425F9C]"
-        @click="facebookAuth"
-      >
-        <i-mdi-facebook class="h-5 w-5" />
-      </VButton>
-    </div>
 
     <slot name="actions" />
   </div>
 </template>
+
+<style>
+.title {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 31px;
+
+  margin-top: 64px;
+  color: #000000;
+
+  opacity: 0.72;
+}
+</style>

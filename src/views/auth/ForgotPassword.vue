@@ -21,10 +21,11 @@ async function onSubmit() {
 }
 </script>
 <template>
-  <div>
-    <h2 class="mb- text-2xl font-bold">Lost your password?</h2>
+  <AppTopBar :signUp="false" />
+  <div class="text-center mt-16">
+    <h2 class="mb-4 text-2xl font-bold">Lost your password?</h2>
     <p class="mb-4 text-sm text-slate-500">Let's sort that for you</p>
-    <form class="flex w-full flex-col items-start" @submit.prevent="onSubmit">
+    <form class="flex w-full flex-col items-center" @submit.prevent="onSubmit">
       <VLabel for="email">Email</VLabel>
       <VInput
         required
@@ -36,13 +37,8 @@ async function onSubmit() {
         placeholder="Enter your email"
         v-model="email"
       />
-
       <VButton :loading="loading" type="submit" class="bg-teal-700"> Reset </VButton>
     </form>
-
-    <span class="text-sm">
-      <router-link to="/signup" class="font-bold">Sign up</router-link><br />
-      <router-link to="/signin" class="font-bold">Sign in</router-link>
-    </span>
   </div>
+  <AppFooter />
 </template>

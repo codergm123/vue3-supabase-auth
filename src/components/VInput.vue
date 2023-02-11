@@ -16,6 +16,22 @@ function onInput(event: Event): void {
   <input
     :value="modelValue"
     @input="onInput"
-    class="mb-4 rounded border py-1 px-3 text-slate-900 outline-none transition focus:ring"
+    class="widgetinput outline-none transition focus:ring"
   />
 </template>
+
+<style>
+.widgetinput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+
+  width: 400px;
+  height: 40px;
+
+  background: #FFFFFF;
+  border: 2px solid rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+}
+</style>

@@ -1,34 +1,67 @@
+<script lang="ts" setup>
+const props = defineProps<{
+  signUp: boolean;
+}>();
+
+</script>
+
 <template>
-  <header
-    class="sticky top-0 z-30 flex items-center justify-between p-3 shadow"
-  >
-    <div class="flex items-center">
-      <v-icon-button @click="$emit('update:modelValue', !modelValue)">
-        <i-carbon-menu class="h-6 w-6" />
-      </v-icon-button>
-    </div>
-    <div class="flex items-center space-x-4">
-      <v-icon-button @click="toggleDark()">
-        <i-carbon-sun class="h-6 w-6 dark:hidden" />
-        <i-carbon-moon class="hidden h-6 w-6 dark:block" />
-      </v-icon-button>
+  <header class="header z-12 bg-white">
+    <div class="flex items-center justify-between mx-auto">
+      <div class="flex items-center">
+        <a class="textlogo font-logo md:text-md font-bold" href="/">
+          __Logo__
+        </a>
+      </div>
+
+      <div class="group relative dropdown text-purple-500 cursor-pointer text-base tracking-wide font-bold" style="fontFamily: 'none';">
+        <span class="desc">
+          {{signUp? "Already have an account?" : "Don't have an account yet?"}}
+              
+          <router-link v-if="signUp" to="/signin" class="signinbutton font-bold">
+            Sign in
+          </router-link>
+          <router-link v-if="!signUp" to="/signup" class="signinbutton font-bold">
+            Sign up
+          </router-link> 
+          
+        </span>
+      </div>
     </div>
   </header>
 </template>
 
-<script lang="ts" setup>
-import { Ref } from "vue";
-import { isDarkKey } from "@/symbols";
+<style>
+  .textlogo {
+    font-family: 'Noto Sans'; 
+    font-style: normal;
+    font-weight: 700;
+    color: #100F39; 
+    font-size: 19px; 
+    line-height: 26px; 
+    margin-left: 24px; 
+    margin-top: 24px; 
+    margin-bottom: 22px;
+  }
 
-/* modelValue here refers to whether or not to show side nav drawer */
-defineProps<{
-  modelValue: boolean;
-}>();
+  .desc {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    color: #000000;
+    opacity: 0.64;
+    margin-right: 4px;
+  }
 
-defineEmits<{
-  (e: "update:modelValue", value: boolean): void;
-}>();
-
-const isDark = inject(isDarkKey) as Ref<boolean>;
-const toggleDark = useToggle(isDark);
-</script>
+  .signinbutton {
+    font-family: 'Noto Sans'; 
+    font-weight: 600;
+    font-style: normal;
+    color: #322DF0; 
+    margin-right: 26px; 
+    line-height: 20px; 
+    font-size: 15px;
+  }
+</style>style>
